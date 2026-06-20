@@ -1,0 +1,463 @@
+html {
+  scroll-behavior: smooth;
+}
+
+section[id],
+.courses-section,
+.partners-section,
+.contact-section {
+  scroll-margin-top: 70px;
+}
+
+
+/* 1.  NAVIGATION */
+
+/* Hamburger button — hidden on desktop */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 6px;
+  background: none;
+  border: none;
+}
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Mobile nav drawer — slides in from top */
+@media (max-width: 768px) {
+
+  .custom-nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 1.2em;
+    height: auto;
+    min-height: 9vh;
+    gap: 0;
+  }
+
+  .nav-left {
+    flex: 1;
+    justify-content: flex-start;
+    padding: 0.55em 0;
+    width: auto;
+  }
+
+  .nav-right-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.55em 0;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  #login {
+    padding: 0.38em 0.9em;
+    font-size: 13px;
+    white-space: nowrap;
+    border-radius: 6px;
+  }
+
+  .nav-ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    margin-left: 0;
+    background: rgba(0, 0, 0, 0.88);
+    padding: 0.4em 0 0.8em;
+    order: 99;
+  }
+
+  .nav-ul.open {
+    display: flex;
+  }
+
+  .nav-ul li a {
+    display: block;
+    padding: 0.65em 1.4em;
+    border-radius: 0;
+    font-size: 15px;
+  }
+}
+
+
+/* 2.  HERO SECTION  (#hero) */
+
+@media (max-width: 1200px) {
+  .hero-h   { font-size: 2.4em; }
+  .empower  { margin-left: 2.4em; }
+  .hero-p,
+  #btn      { margin-left: 2.2em; }
+  .sucess   { margin-left: 2.2em; }
+
+  #card-video  { right: 38%; }
+  #card-code   { left: 10%; }
+  #card-hands  { left: 6%; }
+  #card-cert   { right: 1%; }
+}
+
+@media (max-width: 992px) {
+  #hero {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    min-height: 100vh;
+    padding-top: 10vh;
+    padding-bottom: 3em;
+  }
+
+  .hero-right {
+    position: relative;
+    width: 100%;
+    height: 340px;
+    margin-top: 2em;
+  }
+
+  .hero-h   { font-size: 2em; margin-left: 0.6em; }
+  .empower  { margin-left: 1.4em; font-size: 0.9rem; }
+  .hero-p,
+  #btn      { margin-left: 1.2em; }
+  .sucess   { margin-left: 1.2em; }
+
+  .btn      { padding: 0.8em 1.2em; font-size: 0.85rem; }
+
+  #card-video  { top: 5%;  right: auto; left: 5%; }
+  #card-code   { top: 30%; left: 40%; }
+  #card-hands  { bottom: 10%; left: 5%; }
+  #card-cert   { bottom: 10%; right: 5%; }
+}
+
+@media (max-width: 768px) {
+  .hero-h   { font-size: 1.7em; }
+  #btn      { flex-direction: column; gap: 0.8em; }
+  .btn      { width: fit-content; }
+
+  .hero-right { height: 280px; }
+
+  #card-video  { display: none; }
+  #card-code   { top: 8%;  left: 5%; }
+  #card-hands  { bottom: 8%; left: 5%; }
+  #card-cert   { bottom: 8%; right: 5%; }
+
+  .sucess #num { flex-wrap: wrap; gap: 0.5em; }
+  .sucess #num span { border-right: none; }
+}
+
+@media (max-width: 576px) {
+  .hero-h   { font-size: 1.4em; margin-left: 0.4em; }
+  .empower  { margin-left: 0.8em; font-size: 0.8rem; }
+  .hero-p   { font-size: 0.8rem; margin-left: 0.8em; }
+  #btn      { margin-left: 0.8em; }
+  .sucess   { margin-left: 0.8em; }
+
+  .hero-right { height: 220px; }
+  #card-cert  { display: none; }
+}
+
+
+/* 3.  ABOUT SECTION  (#about) */
+
+@media (max-width: 1200px) {
+  #about { height: auto; min-height: 95vh; }
+
+  #card-mission { left: 10%; right: 50%; }
+  #card-qe      { left: 55%; }
+  #card-vision  { left: 30%; right: 5%; }
+}
+
+@media (max-width: 992px) {
+  #about {
+    flex-direction: column;
+    height: auto;
+    min-height: auto;
+    padding: 80px 20px 40px;
+  }
+
+  .about-left {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    margin-bottom: 1.5em;
+  }
+
+  .about-right {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  #about-p   { position: relative; top: auto; left: auto; margin-bottom: 0.8em; }
+  .about-text { position: relative; top: auto; left: auto; }
+
+  #card-demand,
+  #card-learning,
+  #card-achive {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    margin-bottom: 0.8em;
+  }
+
+  #about-h { font-size: 1.6em; }
+
+  #card-mission { top: 5%;  left: 2%;  right: auto; }
+  #card-qe      { top: 30%; left: 50%; }
+  #card-community { bottom: 5%; left: 2%; right: auto; }
+  #card-vision  { bottom: 5%; left: 45%; right: auto; }
+}
+
+@media (max-width: 768px) {
+  .about-left  { height: 220px; }
+
+  #card-community,
+  #card-vision { display: none; }
+
+  #card-mission { font-size: 0.85rem; }
+  #card-qe      { font-size: 0.85rem; }
+}
+
+@media (max-width: 576px) {
+  #about { padding: 70px 14px 30px; }
+  .about-left { height: 180px; }
+  #card-qe    { left: 45%; }
+  #about-h    { font-size: 1.3em; }
+  .about-p    { font-size: 0.8rem; }
+}
+
+
+/* 4.  COURSES SECTION  (.courses-section) */
+
+@media (max-width: 1200px) {
+  .course-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 100%;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 992px) {
+  .courses-section { padding: 50px 24px; }
+
+  .courses-heading { font-size: 30px; }
+
+  .course-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .filter-bar { gap: 8px; }
+  .filter-btn { padding: 8px 14px; font-size: 13px; }
+}
+
+@media (max-width: 768px) {
+  .courses-heading { font-size: 26px; }
+  .courses-sub     { font-size: 14px; }
+
+  .course-grid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .courses-section { padding: 40px 14px; }
+  .courses-heading { font-size: 22px; }
+
+  .filter-bar { gap: 6px; }
+  .filter-btn { padding: 7px 12px; font-size: 12px; }
+  .filter-btn svg { width: 13px; height: 13px; }
+
+  .card-features { grid-template-columns: 1fr; }
+  .view-all-btn  { font-size: 14px; padding: 10px 22px; }
+}
+
+
+/* 5.  HIRING PARTNERS SECTION  (.partners-section) */
+
+@media (max-width: 1200px) {
+  .partners-grid {
+    grid-template-columns: repeat(6, 1fr);
+    padding: 22px;
+  }
+}
+
+@media (max-width: 992px) {
+  .partners-section { padding: 50px 24px; }
+
+  .partners-heading { font-size: 34px; }
+
+  .partners-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .stats-bar { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .stat-item { flex: 0 1 200px; }
+}
+
+@media (max-width: 768px) {
+  .partners-heading { font-size: 28px; }
+  .partners-sub     { font-size: 14px; }
+
+  .partners-grid {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 16px;
+    gap: 10px;
+  }
+
+  .logo-text   { font-size: 13px; }
+  .partner-card { padding: 14px 6px; }
+
+  .stats-bar { gap: 14px; padding: 20px; }
+  .stat-text strong { font-size: 18px; }
+}
+
+@media (max-width: 576px) {
+  .partners-section { padding: 40px 14px; }
+
+  .partners-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 12px;
+  }
+
+  .logo-text    { font-size: 11px; }
+  .partner-card { padding: 12px 4px; }
+
+  .stats-bar { flex-direction: column; align-items: stretch; gap: 0; padding: 16px; }
+  .stat-item {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 14px 0;
+  }
+  .stat-item:last-child { border-bottom: none; }
+}
+
+@media (max-width: 480px) {
+  .partners-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* 6.  CONTACT SECTION  (.contact-section) */
+
+@media (max-width: 1200px) {
+  .contact-container { gap: 28px; }
+  .contact-heading   { font-size: 34px; }
+}
+
+@media (max-width: 992px) {
+  .contact-section { padding: 50px 24px; }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-right { margin-top: 0; }
+
+  .contact-heading { font-size: 30px; }
+
+  .features-bar { grid-template-columns: repeat(2, 1fr); gap: 0; }
+  .feature {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding: 18px;
+  }
+  .feature:nth-child(odd)  { border-right: 1px solid #eee; }
+  .feature:nth-child(3),
+  .feature:nth-child(4)    { border-bottom: none; }
+}
+
+@media (max-width: 768px) {
+  .contact-heading { font-size: 26px; }
+  .contact-sub     { font-size: 14px; }
+
+  .form-row { grid-template-columns: 1fr; }
+
+  .features-bar { grid-template-columns: 1fr; }
+  .feature { border-right: none !important; }
+  .feature:last-child { border-bottom: none; }
+}
+
+@media (max-width: 576px) {
+  .contact-section  { padding: 40px 14px; }
+  .contact-heading  { font-size: 22px; }
+  .contact-right    { padding: 22px 16px; }
+  .info-item        { padding: 12px 14px; }
+  .info-icon        { width: 36px; height: 36px; }
+
+  .send-btn         { width: 100%; justify-content: center; }
+  .features-bar     { padding: 16px; }
+  .feature          { gap: 10px; }
+  .feature-icon     { width: 38px; height: 38px; }
+}
+
+
+/* 7.  FOOTER  (.site-footer) */
+
+@media (max-width: 1200px) {
+  .footer-top {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  }
+  .footer-top .contact-col {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 20px;
+  }
+  .footer-top .contact-col h4 { grid-column: 1 / -1; }
+  .contact-list { columns: 2; column-gap: 30px; }
+  .contact-list li { break-inside: avoid; }
+}
+
+@media (max-width: 992px) {
+  .site-footer   { padding: 50px 24px 0; }
+
+  .footer-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+
+  .footer-brand { grid-column: 1 / -1; }
+
+  .contact-list { columns: 1; }
+  .footer-top .contact-col { grid-column: auto; display: block; }
+}
+
+@media (max-width: 768px) {
+  .footer-top { grid-template-columns: 1fr; }
+
+  .footer-col   { border-bottom: 1px solid #1c3868; padding-bottom: 20px; }
+  .footer-brand { border-bottom: 1px solid #1c3868; padding-bottom: 20px; }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+  .footer-legal { flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .footer-legal .divider { margin: 0 6px; }
+}
+
+
+@media (max-width: 576px) {
+  .site-footer   { padding: 40px 14px 0; }
+  .logo-text     { font-size: 20px; }
+  .footer-desc   { font-size: 13px; }
+  .social-icons  { gap: 10px; }
+
+  .footer-bottom { font-size: 13px; }
+}

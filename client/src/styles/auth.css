@@ -1,0 +1,493 @@
+/* ===== Shared helpers ===== */
+.page-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  font-size: 18px;
+  color: #555;
+}
+
+.form-error {
+  color: #d92d20;
+  background: #fef3f2;
+  border: 1px solid #fecdca;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.form-success {
+  color: #1ca34e;
+  background: #e6f4ea;
+  border: 1px solid #b7e4c7;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.course-feedback {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 20px;
+  background: #e8f0fe;
+  color: #1a56db;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 15px;
+}
+
+/* ===== Navbar account menu ===== */
+.account-menu {
+  position: relative;
+}
+
+.account-btn {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.account-dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  min-width: 170px;
+  overflow: hidden;
+  z-index: 10000;
+}
+
+.account-dropdown a,
+.account-dropdown button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #242f67;
+  background: none;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.account-dropdown a:hover,
+.account-dropdown button:hover {
+  background: #f3f6ff;
+}
+
+/* ===== Auth pages (Login / Register) ===== */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #eaf0ff 0%, #f7faff 100%);
+  padding: 40px 20px;
+}
+
+.auth-card {
+  background: #fff;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px 36px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(26, 86, 219, 0.1);
+}
+
+.auth-logo {
+  display: block;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  color: #0f1a3d;
+  text-decoration: none;
+  margin-bottom: 18px;
+}
+
+.auth-logo .logo-accent {
+  color: #0151e6;
+}
+
+.auth-card h2 {
+  text-align: center;
+  font-size: 24px;
+  color: #0f1a3d;
+  margin-bottom: 6px;
+}
+
+.auth-sub {
+  text-align: center;
+  font-size: 15px;
+  color: #888;
+  margin-bottom: 26px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.auth-form label {
+  font-size: 13px;
+  color: #555;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.auth-form input,
+.auth-form select,
+.auth-form textarea {
+  padding: 12px 14px;
+  border: 1px solid #dde5f4;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: Lato, sans-serif;
+  color: #242f67;
+}
+
+.auth-form input:focus,
+.auth-form select:focus,
+.auth-form textarea:focus {
+  outline: none;
+  border-color: #1a56db;
+}
+
+.auth-form button {
+  margin-top: 18px;
+  width: 100%;
+  justify-content: center;
+}
+
+.auth-switch {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-top: 22px;
+}
+
+.auth-switch a {
+  color: #0151e6;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ===== Contact form additions ===== */
+.contact-form .form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.contact-form .form-row input {
+  flex: 1;
+}
+
+/* ===== Dashboard ===== */
+.dashboard-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 140px 24px 80px;
+  min-height: 70vh;
+}
+
+.dashboard-header h1 {
+  font-size: 30px;
+  color: #0f1a3d;
+  margin-bottom: 4px;
+}
+
+.dashboard-header p {
+  color: #888;
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+.dashboard-section-title {
+  font-size: 20px;
+  color: #0f1a3d;
+  margin-bottom: 18px;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.dashboard-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.dashboard-card h3 {
+  font-size: 17px;
+  color: #0f1a3d;
+  margin-bottom: 6px;
+}
+
+.dashboard-card-meta {
+  font-size: 13px;
+  color: #1a56db;
+  margin-bottom: 4px;
+}
+
+.dashboard-card-date {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 14px;
+}
+
+.cancel-btn {
+  background: #fef3f2;
+  color: #d92d20;
+  border: 1px solid #fecdca;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #fee4e2;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: #f7faff;
+  border-radius: 14px;
+}
+
+.empty-state p {
+  color: #888;
+  margin-bottom: 18px;
+}
+
+/* ===== Admin panel ===== */
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
+
+.admin-tab {
+  position: relative;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid #dde5f4;
+  background: #fff;
+  color: #555;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.admin-tab.active {
+  background: #0151e6;
+  border-color: #0151e6;
+  color: #fff;
+}
+
+.tab-badge {
+  background: #d92d20;
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+  margin-bottom: 10px;
+}
+
+.admin-stat-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.admin-stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0151e6;
+}
+
+.admin-stat-label {
+  font-size: 13px;
+  color: #888;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+.admin-section {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.admin-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-section h3 {
+  font-size: 18px;
+  color: #0f1a3d;
+  margin-bottom: 14px;
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 10px 12px;
+  background: #f7faff;
+  color: #555;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #eef1f8;
+  color: #333;
+}
+
+.message-cell {
+  max-width: 240px;
+  white-space: normal;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #0151e6;
+  font-size: 13px;
+  cursor: pointer;
+  margin-right: 12px;
+  padding: 0;
+}
+
+.link-btn.danger {
+  color: #d92d20;
+}
+
+.status-pill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-pill.active,
+.status-pill.read {
+  background: #e6f4ea;
+  color: #1ca34e;
+}
+
+.status-pill.cancelled {
+  background: #fef3f2;
+  color: #d92d20;
+}
+
+.status-pill.new {
+  background: #fff3e0;
+  color: #f97316;
+}
+
+.unread-row {
+  background: #fffaf0;
+}
+
+/* ===== Modal (course form) ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 26, 61, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20000;
+  padding: 20px;
+}
+
+.modal-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+
+.modal-card h3 {
+  font-size: 20px;
+  color: #0f1a3d;
+  margin-bottom: 16px;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  flex: 1;
+}
+
+.btn-outline {
+  padding: 12px;
+  border-radius: 1em;
+  border: 1px solid #dde5f4;
+  background: #fff;
+  color: #555;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+@media (max-width: 640px) {
+  .contact-form .form-row {
+    flex-direction: column;
+  }
+  .admin-section {
+    padding: 16px;
+  }
+}
