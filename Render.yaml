@@ -1,0 +1,48 @@
+services:
+  # ── Backend: Node/Express API ──────────────────────────────
+  - type: web
+    name: skillforge-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false          # set manually in Render dashboard
+      - key: JWT_SECRET
+        sync: false          # set manually in Render dashboard
+      - key: CLIENT_URL
+        sync: false          # paste your Render static site URL after deploying frontend
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      - key: RAZORPAY_KEY_ID
+        sync: false
+      - key: RAZORPAY_KEY_SECRET
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+
+  # ── Frontend: React/Vite Static Site ──────────────────────
+  - type: web
+    name: skillforge-client
+    runtime: static
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    plan: free
+    envVars:
+      - key: VITE_API_URL
+        sync: false          # paste your skillforge-api URL + /api  e.g. https://skillforge-api.onrender.com/api
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
