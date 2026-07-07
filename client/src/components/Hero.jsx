@@ -92,10 +92,7 @@ const Hero = () => {
               <span className="dot yellow"></span>
               <span className="dot green-dot"></span>
             </div>
-            <pre><code><span className="fn">function</span> learn() {'{'}
-  improve();
-  succeed();
-{'}'}</code></pre>
+            <pre><code><span className="c-keyword">function</span> <span className="c-fn-name">learn</span><span className="c-punc">()</span> <span className="c-brace">{'{'}</span>{'\n'}{'  '}<span className="c-fn-call">improve</span><span className="c-punc">()</span><span className="c-semi">;</span>{'\n'}{'  '}<span className="c-fn-call">succeed</span><span className="c-punc">()</span><span className="c-semi">;</span>{'\n'}<span className="c-brace">{'}'}</span></code></pre>
           </div>
         </div>
 

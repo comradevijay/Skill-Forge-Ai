@@ -17,6 +17,20 @@ export const enrollInCourse = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error('Course not found');
   }
+  if (course.status !== 'published') {
+    res.status(400);
+    throw new Error('This course is not yet available for enrollment');
+  }
+
+  // ── PAYMENT GUARD ──────────────────────────────────────────────────────────
+  // Block direct enrollment for paid courses. Paid courses must go through
+  // the payment flow (/api/payments/order → /api/payments/verify) which
+  // creates the enrollment after confirming the Razorpay signature.
+  if (course.price && course.price > 0) {
+    res.status(403);
+    throw new Error('This is a paid course. Please complete payment to enroll.');
+  }
+  // ──────────────────────────────────────────────────────────────────────────
 
   const existing = await Enrollment.findOne({ user: req.user._id, course: courseId });
 

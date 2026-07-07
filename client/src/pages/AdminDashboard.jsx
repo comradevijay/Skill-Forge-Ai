@@ -3,7 +3,7 @@ import api from '../api/axios.js';
 import Navbar from '../components/Navbar.jsx';
 import Footer from '../components/Footer.jsx';
 
-const TABS = ['Overview', 'Courses', 'Enrollments', 'Leads'];
+const TABS = ['Overview', 'Courses', 'Instructors', 'Enrollments', 'Leads'];
 
 const emptyCourseForm = {
   title: '',
@@ -30,21 +30,25 @@ const AdminDashboard = () => {
   const [editingCourse, setEditingCourse] = useState(null);
   const [courseForm, setCourseForm] = useState(emptyCourseForm);
   const [showCourseForm, setShowCourseForm] = useState(false);
+  const [instructors, setInstructors] = useState([]);
+  const [instructorFilter, setInstructorFilter] = useState('pending');
 
   const loadAll = async () => {
     setLoading(true);
     setError('');
     try {
-      const [statsRes, coursesRes, enrollRes, leadsRes] = await Promise.all([
+      const [statsRes, coursesRes, enrollRes, leadsRes, instructorsRes] = await Promise.all([
         api.get('/admin/stats'),
-        api.get('/courses'),
+        api.get('/instructor/courses'), // admin sees ALL courses (draft + published) here
         api.get('/enrollments'),
         api.get('/contact'),
+        api.get(`/admin/instructors?status=${instructorFilter}`),
       ]);
       setStats(statsRes.data.stats);
       setCourses(coursesRes.data.courses);
       setEnrollments(enrollRes.data.enrollments);
       setLeads(leadsRes.data.leads);
+      setInstructors(instructorsRes.data.instructors);
     } catch (err) {
       setError(err.response?.data?.message || 'Could not load admin data.');
     } finally {
@@ -54,7 +58,28 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     loadAll();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [instructorFilter]);
+
+  // --- Instructors ---
+  const handleApprove = async (id) => {
+    try {
+      await api.patch(`/admin/instructors/${id}/approve`);
+      setInstructors((prev) => prev.filter((i) => i._id !== id));
+    } catch (err) {
+      setError(err.response?.data?.message || 'Could not approve instructor.');
+    }
+  };
+
+  const handleReject = async (id) => {
+    if (!window.confirm('Reject this instructor application?')) return;
+    try {
+      await api.patch(`/admin/instructors/${id}/reject`);
+      setInstructors((prev) => prev.filter((i) => i._id !== id));
+    } catch (err) {
+      setError(err.response?.data?.message || 'Could not reject instructor.');
+    }
+  };
 
   // --- Course CRUD ---
   const openNewCourseForm = () => {
@@ -96,10 +121,10 @@ const AdminDashboard = () => {
 
     try {
       if (editingCourse) {
-        const res = await api.put(`/courses/${editingCourse._id}`, payload);
+        const res = await api.put(`/instructor/courses/${editingCourse._id}`, payload);
         setCourses((prev) => prev.map((c) => (c._id === editingCourse._id ? res.data.course : c)));
       } else {
-        const res = await api.post('/courses', payload);
+        const res = await api.post('/instructor/courses', payload);
         setCourses((prev) => [...prev, res.data.course]);
       }
       setShowCourseForm(false);
@@ -111,10 +136,19 @@ const AdminDashboard = () => {
   const handleDeleteCourse = async (id) => {
     if (!window.confirm('Delete this course? This cannot be undone.')) return;
     try {
-      await api.delete(`/courses/${id}`);
+      await api.delete(`/instructor/courses/${id}`);
       setCourses((prev) => prev.filter((c) => c._id !== id));
     } catch (err) {
       setError(err.response?.data?.message || 'Could not delete course.');
+    }
+  };
+
+  const handleTogglePublish = async (course) => {
+    try {
+      const res = await api.patch(`/instructor/courses/${course._id}/publish`);
+      setCourses((prev) => prev.map((c) => (c._id === course._id ? res.data.course : c)));
+    } catch (err) {
+      setError(err.response?.data?.message || 'Could not update course status.');
     }
   };
 
@@ -169,6 +203,9 @@ const AdminDashboard = () => {
               {t === 'Leads' && stats?.newLeads > 0 && (
                 <span className="tab-badge">{stats.newLeads}</span>
               )}
+              {t === 'Instructors' && stats?.pendingInstructors > 0 && (
+                <span className="tab-badge">{stats.pendingInstructors}</span>
+              )}
             </button>
           ))}
         </div>
@@ -181,6 +218,10 @@ const AdminDashboard = () => {
             <div className="admin-stat-card">
               <span className="admin-stat-value">{stats.totalStudents}</span>
               <span className="admin-stat-label">Registered Students</span>
+            </div>
+            <div className="admin-stat-card">
+              <span className="admin-stat-value">{stats.totalInstructors}</span>
+              <span className="admin-stat-label">Approved Instructors {stats.pendingInstructors > 0 && `(${stats.pendingInstructors} pending)`}</span>
             </div>
             <div className="admin-stat-card">
               <span className="admin-stat-value">{stats.totalCourses}</span>
@@ -221,7 +262,7 @@ const AdminDashboard = () => {
             <div className="admin-table-wrap">
               <table className="admin-table">
                 <thead>
-                  <tr><th>Title</th><th>Category</th><th>Duration</th><th>Rating</th><th>Actions</th></tr>
+                  <tr><th>Title</th><th>Category</th><th>Duration</th><th>Status</th><th>Actions</th></tr>
                 </thead>
                 <tbody>
                   {courses.map((c) => (
@@ -229,9 +270,12 @@ const AdminDashboard = () => {
                       <td>{c.title}</td>
                       <td>{c.category}</td>
                       <td>{c.duration}</td>
-                      <td>{c.rating}</td>
+                      <td><span className={`status-pill ${c.status}`}>{c.status}</span></td>
                       <td>
                         <button className="link-btn" onClick={() => openEditCourseForm(c)}>Edit</button>
+                        <button className="link-btn" onClick={() => handleTogglePublish(c)}>
+                          {c.status === 'published' ? 'Unpublish' : 'Publish'}
+                        </button>
                         <button className="link-btn danger" onClick={() => handleDeleteCourse(c._id)}>Delete</button>
                       </td>
                     </tr>
@@ -290,6 +334,52 @@ const AdminDashboard = () => {
                     </div>
                   </form>
                 </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {!loading && tab === 'Instructors' && (
+          <div className="admin-section">
+            <div className="admin-section-header">
+              <h3>Instructors</h3>
+              <select value={instructorFilter} onChange={(e) => setInstructorFilter(e.target.value)}>
+                <option value="pending">Pending Approval</option>
+                <option value="approved">Approved</option>
+                <option value="rejected">Rejected</option>
+              </select>
+            </div>
+
+            {instructors.length === 0 ? (
+              <p className="courses-sub">No {instructorFilter} instructors.</p>
+            ) : (
+              <div className="admin-table-wrap">
+                <table className="admin-table">
+                  <thead>
+                    <tr><th>Name</th><th>Email</th><th>Bio</th><th>Applied</th><th>Actions</th></tr>
+                  </thead>
+                  <tbody>
+                    {instructors.map((i) => (
+                      <tr key={i._id}>
+                        <td>{i.name}</td>
+                        <td>{i.email}</td>
+                        <td className="message-cell">{i.bio || '—'}</td>
+                        <td>{new Date(i.createdAt).toLocaleDateString()}</td>
+                        <td>
+                          {instructorFilter === 'pending' && (
+                            <>
+                              <button className="link-btn" onClick={() => handleApprove(i._id)}>Approve</button>
+                              <button className="link-btn danger" onClick={() => handleReject(i._id)}>Reject</button>
+                            </>
+                          )}
+                          {instructorFilter === 'rejected' && (
+                            <button className="link-btn" onClick={() => handleApprove(i._id)}>Approve Anyway</button>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             )}
           </div>

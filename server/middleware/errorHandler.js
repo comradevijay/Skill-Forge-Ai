@@ -7,7 +7,7 @@ export const notFound = (req, res, next) => {
 // Final error handler - formats all thrown errors as consistent JSON.
 // Anything thrown inside an asyncHandler-wrapped controller ends up here.
 export const errorHandler = (err, req, res, next) => {
-  let statusCode = res.statusCode && res.statusCode !== 200 ? res.statusCode : 500;
+  let statusCode = err.statusCode || (res.statusCode && res.statusCode !== 200 ? res.statusCode : 500);
   let message = err.message || 'Server error';
 
   // Mongoose bad ObjectId
@@ -29,6 +29,13 @@ export const errorHandler = (err, req, res, next) => {
     message = Object.values(err.errors)
       .map((e) => e.message)
       .join(', ');
+  }
+
+  // Multer upload errors (file too large, wrong field name, etc.)
+  if (err.name === 'MulterError') {
+    statusCode = 400;
+    message =
+      err.code === 'LIMIT_FILE_SIZE' ? 'File is too large' : err.message || 'File upload error';
   }
 
   res.status(statusCode).json({

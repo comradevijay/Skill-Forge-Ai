@@ -31,16 +31,6 @@ const partners = [
   { name: "BYJU'S", color: '#54177D' },
   { name: 'PhonePe', color: '#5F259F' },
   { name: 'Flipkart', color: '#2874F0' },
-  { name: 'OLA', color: '#000000' },
-  { name: 'Myntra', color: '#F50057' },
-  { name: 'LTIMindtree', color: '#003D6A' },
-  { name: 'CRED', color: '#000000' },
-  { name: 'Groww', color: '#00D09C' },
-  { name: 'MEESHO', color: '#E5007E' },
-  { name: 'DUNZO', color: '#00C566' },
-  { name: 'upGrad', color: '#E1251B' },
-  { name: 'RingCentral', color: '#008FD3' },
-  { name: 'zscaler', color: '#0073E6' },
 ];
 
 const stats = [

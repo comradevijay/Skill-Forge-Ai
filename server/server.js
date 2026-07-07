@@ -11,6 +11,13 @@ import courseRoutes from './routes/courseRoutes.js';
 import enrollmentRoutes from './routes/enrollmentRoutes.js';
 import contactRoutes from './routes/contactRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import instructorRoutes from './routes/instructorRoutes.js';
+import lessonRoutes from './routes/lessonRoutes.js';
+import progressRoutes from './routes/progressRoutes.js';
+import uploadRoutes from './routes/uploadRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
+import aiRoutes from './routes/aiRoutes.js';
+import dsaRoutes from './routes/dsaRoutes.js';
 
 dotenv.config();
 
@@ -22,9 +29,21 @@ app.set('trust proxy', 1);
 
 // Security + logging middleware
 app.use(helmet());
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  'http://localhost:5173',
+  'http://localhost:5174',
+].filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: (origin, callback) => {
+      // allow requests with no origin (curl, mobile apps, server-to-server)
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error(`CORS blocked for origin: ${origin}`));
+    },
     credentials: true,
   })
 );
@@ -43,6 +62,13 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/enrollments', enrollmentRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/instructor', instructorRoutes);
+app.use('/api/lessons', lessonRoutes);
+app.use('/api/progress', progressRoutes);
+app.use('/api/uploads', uploadRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/ai', aiRoutes);
+app.use('/api/dsa', dsaRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

@@ -25,8 +25,24 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['student', 'admin'],
+      enum: ['student', 'instructor', 'admin'],
       default: 'student',
+    },
+    // Only relevant when role = 'instructor'. Admin must approve before
+    // the instructor can create/publish courses.
+    instructorStatus: {
+      type: String,
+      enum: ['none', 'pending', 'approved', 'rejected'],
+      default: 'none',
+    },
+    bio: {
+      type: String,
+      maxlength: 1000,
+      default: '',
+    },
+    avatarUrl: {
+      type: String,
+      default: '',
     },
   },
   { timestamps: true }

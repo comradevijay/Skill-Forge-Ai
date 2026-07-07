@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 
+
 const Navbar = () => {
   const { user, logout } = useAuth();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -24,7 +25,7 @@ const Navbar = () => {
           <ul className="nav-ul">
             <li><a href="/#hero">Home</a></li>
             <li><a href="/#about">About</a></li>
-            <li><a href="/#courses">Courses</a></li>
+            <li><Link to="/courses">Courses</Link></li>
             <li><a href="/#companies">Hiring Partners</a></li>
             <li><a href="/#contact">Contact</a></li>
           </ul>
@@ -45,9 +46,18 @@ const Navbar = () => {
               </button>
               {accountOpen && (
                 <div className="account-dropdown">
-                  <Link to="/dashboard" onClick={() => setAccountOpen(false)}>
-                    Dashboard
-                  </Link>
+                  {user.role === 'student' && (
+                    <>
+                      <Link to="/dashboard" onClick={() => setAccountOpen(false)}>Dashboard</Link>
+                      <Link to="/mock-interview" onClick={() => setAccountOpen(false)}>🎤 Mock Interview</Link>
+                      <Link to="/payment-history" onClick={() => setAccountOpen(false)}>💳 Payment History</Link>
+                    </>
+                  )}
+                  {user.role === 'instructor' && (
+                    <Link to="/instructor" onClick={() => setAccountOpen(false)}>
+                      Instructor Dashboard
+                    </Link>
+                  )}
                   {user.role === 'admin' && (
                     <Link to="/admin" onClick={() => setAccountOpen(false)}>
                       Admin Panel

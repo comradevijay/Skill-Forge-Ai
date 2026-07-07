@@ -1,28 +1,37 @@
-import React, { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.jsx';
+import React, { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../context/AuthContext.jsx";
 
 const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [error, setError] = useState('');
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (e) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setSubmitting(true);
     try {
       const user = await login(form.email, form.password);
       const redirectTo = location.state?.from?.pathname;
-      navigate(redirectTo || (user.role === 'admin' ? '/admin' : '/dashboard'));
+      const defaultRoute =
+        user.role === "admin"
+          ? "/admin"
+          : user.role === "instructor"
+            ? "/instructor"
+            : "/dashboard";
+      navigate(redirectTo || defaultRoute);
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed. Please try again.');
+      setError(
+        err.response?.data?.message || "Login failed. Please try again.",
+      );
     } finally {
       setSubmitting(false);
     }
@@ -31,7 +40,9 @@ const Login = () => {
   return (
     <div className="auth-page">
       <div className="auth-card">
-        <Link to="/" className="auth-logo">Skill<span className="logo-accent">Forge</span></Link>
+        <Link to="/" className="auth-logo">
+          Skill<span className="logo-accent">Forge</span>
+        </Link>
         <h2>Welcome back</h2>
         <p className="auth-sub">Log in to continue your learning journey.</p>
 
@@ -60,8 +71,13 @@ const Login = () => {
 
           {error && <p className="form-error">{error}</p>}
 
-          <button type="submit" className="btn" id="btn-fill" disabled={submitting}>
-            {submitting ? 'Logging in...' : 'Log In'}
+          <button
+            type="submit"
+            className="btn"
+            id="btn-fill"
+            disabled={submitting}
+          >
+            {submitting ? "Logging in..." : "Log In"}
           </button>
         </form>
 
