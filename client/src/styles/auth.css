@@ -196,7 +196,7 @@
 .dashboard-page {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 40px 24px 60px;
+  padding: 75px 24px 60px;
   min-height: 70vh;
 }
 
@@ -505,7 +505,7 @@
 .course-details-page {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 40px 24px 60px;
+  padding: 75px 24px 60px;
 }
 
 .course-details-hero {
@@ -2640,7 +2640,7 @@
 .courses-page-wrap {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 24px 60px;
+  padding: 75px 24px 60px;
 }
 
 .courses-page-header {
@@ -2848,7 +2848,7 @@
 .checkout-page {
   min-height: 100vh;
   background: #f0f4ff;
-  padding: 40px 24px 60px;
+  padding: 75px 24px 60px;
 }
 
 .checkout-container {
@@ -3057,7 +3057,7 @@
 .invoice-page {
   min-height: 100vh;
   background: #f0f4ff;
-  padding: 40px 24px 60px;
+  padding: 75px 24px 60px;
 }
 
 .invoice-controls {
