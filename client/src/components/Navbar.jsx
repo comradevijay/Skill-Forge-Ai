@@ -23,7 +23,7 @@ const Navbar = () => {
             <img className="logo" src="/img/logo.png" alt="Logo" />
           </Link>
           <ul className="nav-ul">
-            <li><a href="/#hero">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/#about">About</a></li>
             <li><Link to="/courses">Courses</Link></li>
             <li><a href="/#companies">Hiring Partners</a></li>
