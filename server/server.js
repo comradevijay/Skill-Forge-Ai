@@ -53,6 +53,12 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use(express.json());
 
+// Root route — lets keep-alive pings (e.g. cron-job.org) hitting the bare
+// domain get a 200 instead of falling through to notFound
+app.get('/', (req, res) => {
+  res.status(200).send('SkillForge API is running');
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'SkillForge API is running' });
 });
